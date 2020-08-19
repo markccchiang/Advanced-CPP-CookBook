@@ -28,85 +28,75 @@
 #include <functional>
 
 template<
-    typename RET,
-    typename... ARGS
-    >
-class base
-{
+        typename RET,
+        typename... ARGS
+>
+class base {
 public:
     virtual ~base() = default;
+
     virtual RET func(ARGS... args) = 0;
 };
 
 template<
-    typename T,
-    typename RET,
-    typename... ARGS
-    >
+        typename T,
+        typename RET,
+        typename... ARGS
+>
 class wrapper :
-    public base<RET, ARGS...>
-{
+        public base<RET, ARGS...> {
     T m_t{};
+
     RET (T::*m_func)(ARGS...);
 
 public:
 
     wrapper(RET (T::*func)(ARGS...)) :
-        m_func{func}
-    { }
+            m_func{func} {}
 
-    RET func(ARGS... args) override
-    {
+    RET func(ARGS... args) override {
         return std::invoke(m_func, &m_t, args...);
     }
 };
 
 template<
-    typename RET,
-    typename... ARGS
-    >
-class delegate
-{
+        typename RET,
+        typename... ARGS
+>
+class delegate {
     std::unique_ptr<base<RET, ARGS...>> m_wrapper;
 
 public:
 
     template<typename T>
     delegate(RET (T::*func)(ARGS...)) :
-        m_wrapper{
-            std::make_unique<wrapper<T, RET, ARGS...>>(func)
-        }
-    { }
+            m_wrapper{
+                    std::make_unique<wrapper<T, RET, ARGS...>>(func)
+            } {}
 
-    RET operator()(ARGS... args)
-    {
+    RET operator()(ARGS... args) {
         return m_wrapper->func(args...);
     }
 };
 
-class spiderman
-{
+class spiderman {
 public:
-    bool attack(int x, int)
-    {
+    bool attack(int x, int) {
         return x == 0 ? true : false;
     }
 };
 
-class captain_america
-{
+class captain_america {
 public:
-    bool attack(int, int y)
-    {
+    bool attack(int, int y) {
         return y == 0 ? true : false;
     }
 };
 
-int main(void)
-{
-    std::array<delegate<bool, int, int>, 2> heros {
-        delegate(&spiderman::attack),
-        delegate(&captain_america::attack)
+int main(void) {
+    std::array<delegate<bool, int, int>, 2> heros{
+            delegate(&spiderman::attack),
+            delegate(&captain_america::attack)
     };
 
     for (auto &h : heros) {

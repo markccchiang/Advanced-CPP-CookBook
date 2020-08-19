@@ -26,49 +26,42 @@
 #include <memory>
 #include <iostream>
 
-class base
-{
+class base {
 public:
     virtual ~base() = default;
+
     virtual bool attack(int, int) const = 0;
 };
 
 template<typename T>
 class wrapper :
-    public base
-{
+        public base {
     T m_t;
 
 public:
-    bool attack(int x, int y) const override
-    {
+    bool attack(int x, int y) const override {
         return m_t.attack(x, y);
     }
 };
 
-class spiderman
-{
+class spiderman {
 public:
-    bool attack(int x, int) const
-    {
+    bool attack(int x, int) const {
         return x == 0 ? true : false;
     }
 };
 
-class captain_america
-{
+class captain_america {
 public:
-    bool attack(int, int y) const
-    {
+    bool attack(int, int y) const {
         return y == 0 ? true : false;
     }
 };
 
-int main(void)
-{
-    std::array<std::unique_ptr<base>, 2> heros {
-        std::make_unique<wrapper<spiderman>>(),
-        std::make_unique<wrapper<captain_america>>()
+int main(void) {
+    std::array<std::unique_ptr<base>, 2> heros{
+            std::make_unique<wrapper<spiderman>>(),
+            std::make_unique<wrapper<captain_america>>()
     };
 
     for (const auto &h : heros) {

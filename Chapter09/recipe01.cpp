@@ -26,36 +26,31 @@
 #include <memory>
 #include <iostream>
 
-class hero
-{
+class hero {
 public:
     virtual ~hero() = default;
+
     virtual bool attack(int, int) const = 0;
 };
 
-class spiderman : public hero
-{
+class spiderman : public hero {
 public:
-    bool attack(int x, int) const override
-    {
+    bool attack(int x, int) const override {
         return x == 0 ? true : false;
     }
 };
 
-class captain_america : public hero
-{
+class captain_america : public hero {
 public:
-    bool attack(int, int y) const override
-    {
+    bool attack(int, int y) const override {
         return y == 0 ? true : false;
     }
 };
 
-int main(void)
-{
-    std::array<std::unique_ptr<hero>, 2> heros {
-        std::make_unique<spiderman>(),
-        std::make_unique<captain_america>()
+int main(void) {
+    std::array<std::unique_ptr<hero>, 2> heros{
+            std::make_unique<spiderman>(),
+            std::make_unique<captain_america>()
     };
 
     for (const auto &h : heros) {
