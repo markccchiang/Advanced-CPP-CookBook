@@ -109,7 +109,7 @@ example(07)
 
 add_custom_target(recipe04_examples)
 
-set(CMAKE_CXX_CLANG_TIDY clang-tidy)
+#set(CMAKE_CXX_CLANG_TIDY clang-tidy)
 
 function(example number)
     add_executable(recipe04_example${number} recipe04.cpp)
@@ -123,17 +123,17 @@ example(01)
 # Recipe 05
 # ------------------------------------------------------------------------------
 
-add_custom_target(recipe05_examples)
+#add_custom_target(recipe05_examples)
 
-function(example number)
-    add_executable(recipe05_example${number} recipe05.cpp)
-    target_compile_definitions(recipe05_example${number} PRIVATE EXAMPLE${number} BOOST_LOG_DYN_LINK)
-    add_dependencies(recipe05_examples recipe05_example${number})
-    target_link_libraries(recipe05_example${number} boost_chrono boost_log boost_system pthread)
-endfunction(example)
+#function(example number)
+#    add_executable(recipe05_example${number} recipe05.cpp)
+#    target_compile_definitions(recipe05_example${number} PRIVATE EXAMPLE${number} BOOST_LOG_DYN_LINK)
+#    add_dependencies(recipe05_examples recipe05_example${number})
+#    target_link_libraries(recipe05_example${number} boost_chrono boost_log boost_system pthread)
+#endfunction(example)
 
-example(01)
-example(02)
+#example(01)
+#example(02)
 
 # ------------------------------------------------------------------------------
 # Recipe 06

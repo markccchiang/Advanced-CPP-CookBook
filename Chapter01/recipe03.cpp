@@ -25,8 +25,7 @@
 #include "my_library.h"
 #include <iostream>
 
-int main(void)
-{
+int main(void) {
     using namespace library_name;
 
     std::cout << "The answer is: " << my_api() << '\n';

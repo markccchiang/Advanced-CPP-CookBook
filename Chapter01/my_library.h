@@ -25,8 +25,7 @@
 #ifndef MY_LIBRARY
 #define MY_LIBRARY
 
-namespace library_name
-{
+namespace library_name {
     int my_api() { return 42; }
 }
 
@@ -119,7 +118,7 @@ namespace library_name
 
 namespace library_name
 {
-    #define CHECK(a) assert(a == 42)
+#define CHECK(a) assert(a == 42)
 
     void my_api(int val)
     {

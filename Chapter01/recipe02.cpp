@@ -24,8 +24,7 @@
 
 // Contents of library.h
 
-namespace library_name
-{
+namespace library_name {
     int my_api() { return 42; }
     // ...
 }
@@ -34,8 +33,7 @@ namespace library_name
 
 #include <iostream>
 
-int main(void)
-{
+int main(void) {
     using namespace library_name;
 
     std::cout << "The answer is: " << my_api() << '\n';

@@ -19,10 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-namespace library_name
-{
-    namespace config
-    {
+namespace library_name {
+    namespace config {
         inline bool show_hex = false;
     }
 }
@@ -53,14 +51,11 @@ namespace library_name
 #include <iostream>
 #include <iomanip>
 
-namespace library_name
-{
-    void my_api()
-    {
+namespace library_name {
+    void my_api() {
         if (config::show_hex) {
             std::cout << std::hex << "The answer is: " << 42 << '\n';
-        }
-        else {
+        } else {
             std::cout << std::dec << "The answer is: " << 42 << '\n';
         }
     }

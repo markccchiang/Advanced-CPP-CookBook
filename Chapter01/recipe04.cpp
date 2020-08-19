@@ -24,15 +24,13 @@
 
 #include <iostream>
 
-int universe()
-{
+int universe() {
     auto i = new int;
     int the_answer;
     return the_answer;
 }
 
-int main()
-{
+int main() {
     std::cout << universe() << '\n';
     return 0;
 }
