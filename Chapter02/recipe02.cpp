@@ -28,13 +28,11 @@
 #include <iostream>
 #include <stdexcept>
 
-void foo()
-{
+void foo() {
     std::cout << "The answer is: 42\n";
 }
 
-int main(void)
-{
+int main(void) {
     std::cout << std::boolalpha;
     std::cout << "could foo throw: " << !noexcept(foo()) << '\n';
     return 0;
@@ -50,28 +48,23 @@ int main(void)
 #include <iostream>
 #include <stdexcept>
 
-void foo1()
-{
+void foo1() {
     std::cout << "The answer is: 42\n";
 }
 
-void foo2()
-{
+void foo2() {
     throw std::runtime_error("The answer is: 42");
 }
 
-void foo3() noexcept
-{
+void foo3() noexcept {
     std::cout << "The answer is: 42\n";
 }
 
-void foo4() noexcept
-{
+void foo4() noexcept {
     throw std::runtime_error("The answer is: 42");
 }
 
-int main(void)
-{
+int main(void) {
     std::cout << std::boolalpha;
     std::cout << "could foo throw: " << !noexcept(foo1()) << '\n';
     std::cout << "could foo throw: " << !noexcept(foo2()) << '\n';
@@ -93,13 +86,11 @@ int main(void)
 #include <iostream>
 #include <stdexcept>
 
-void foo()
-{
+void foo() {
     throw std::runtime_error("The answer is: 42");
 }
 
-int main(void)
-{
+int main(void) {
     foo();
 }
 
@@ -115,22 +106,18 @@ int main(void)
 #include <iostream>
 #include <stdexcept>
 
-void foo()
-{
+void foo() {
     throw std::runtime_error("The answer is: 42");
 }
 
-int main(void)
-{
-    if constexpr(noexcept(foo())) {
+int main(void) {
+    if constexpr (noexcept(foo())) {
         foo();
-    }
-    else {
+    } else {
         try {
             foo();
+        } catch (...) {
         }
-        catch (...)
-        { }
     }
 }
 
@@ -142,22 +129,18 @@ int main(void)
 #include <iostream>
 #include <stdexcept>
 
-void foo() noexcept
-{
+void foo() noexcept {
     throw std::runtime_error("The answer is: 42");
 }
 
-int main(void)
-{
-    if constexpr(noexcept(foo())) {
+int main(void) {
+    if constexpr (noexcept(foo())) {
         foo();
-    }
-    else {
+    } else {
         try {
             foo();
+        } catch (...) {
         }
-        catch (...)
-        { }
     }
 }
 
@@ -173,18 +156,15 @@ int main(void)
 #include <iostream>
 #include <stdexcept>
 
-void foo1()
-{
+void foo1() {
     std::cout << "The answer is: 42\n";
 }
 
-void foo2() noexcept(noexcept(foo1()))
-{
+void foo2() noexcept(noexcept(foo1())) {
     foo1();
 }
 
-int main(void)
-{
+int main(void) {
     std::cout << std::boolalpha;
     std::cout << "could foo throw: " << !noexcept(foo1()) << '\n';
     std::cout << "could foo throw: " << !noexcept(foo2()) << '\n';
@@ -196,4 +176,3 @@ int main(void)
 #endif
 
 #pragma GCC diagnostic pop
-

@@ -28,21 +28,17 @@
 #include <iostream>
 #include <stdexcept>
 
-class the_answer
-{
+class the_answer {
 public:
-    ~the_answer()
-    {
+    ~the_answer() {
         throw std::runtime_error("42");
     }
 };
 
-int main(void)
-{
+int main(void) {
     try {
         the_answer is;
-    }
-    catch (const std::exception &e) {
+    } catch (const std::exception& e) {
         std::cout << "The answer is: " << e.what() << '\n';
     }
 }
@@ -59,21 +55,17 @@ int main(void)
 #include <iostream>
 #include <stdexcept>
 
-class the_answer
-{
+class the_answer {
 public:
-    ~the_answer() noexcept(false)
-    {
+    ~the_answer() noexcept(false) {
         throw std::runtime_error("42");
     }
 };
 
-int main(void)
-{
+int main(void) {
     try {
         the_answer is;
-    }
-    catch (const std::exception &e) {
+    } catch (const std::exception& e) {
         std::cout << "The answer is: " << e.what() << '\n';
     }
 }
@@ -88,22 +80,18 @@ int main(void)
 #include <iostream>
 #include <stdexcept>
 
-class the_answer
-{
+class the_answer {
 public:
-    ~the_answer() noexcept(false)
-    {
+    ~the_answer() noexcept(false) {
         throw std::runtime_error("42");
     }
 };
 
-int main(void)
-{
+int main(void) {
     try {
         the_answer is;
         throw std::runtime_error("first exception");
-    }
-    catch (const std::exception &e) {
+    } catch (const std::exception& e) {
         std::cout << "The answer is: " << e.what() << '\n';
     }
 }
@@ -120,37 +108,30 @@ int main(void)
 #include <iostream>
 #include <stdexcept>
 
-class nested
-{
+class nested {
 public:
-    ~nested()
-    {
+    ~nested() {
         std::cout << "# exceptions: " << std::uncaught_exceptions() << '\n';
     }
 };
 
-class the_answer
-{
+class the_answer {
 public:
-    ~the_answer()
-    {
+    ~the_answer() {
         try {
             nested n;
             throw std::runtime_error("42");
-        }
-        catch (const std::exception &e) {
+        } catch (const std::exception& e) {
             std::cout << "The answer is: " << e.what() << '\n';
         }
     }
 };
 
-int main(void)
-{
+int main(void) {
     try {
         the_answer is;
         throw std::runtime_error("always 42");
-    }
-    catch (const std::exception &e) {
+    } catch (const std::exception& e) {
         std::cout << "The answer is: " << e.what() << '\n';
     }
 }

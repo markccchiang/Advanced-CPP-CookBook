@@ -28,22 +28,18 @@
 #include <iostream>
 #include <stdexcept>
 
-class the_answer
-{
+class the_answer {
 public:
-    the_answer()
-    {
+    the_answer() {
         std::cout << "The answer is: ";
     }
 
-    ~the_answer()
-    {
+    ~the_answer() {
         std::cout << "42\n";
     }
 };
 
-int main(void)
-{
+int main(void) {
     the_answer is;
     return 0;
 }
@@ -58,27 +54,21 @@ int main(void)
 #include <iostream>
 #include <stdexcept>
 
-class the_answer
-{
+class the_answer {
 public:
+    int* answer{};
 
-    int *answer{};
-
-    the_answer() :
-        answer{new int}
-    {
+    the_answer() : answer{new int} {
         *answer = 42;
     }
 
-    ~the_answer()
-    {
+    ~the_answer() {
         std::cout << "The answer is: " << *answer << '\n';
         delete answer;
     }
 };
 
-int main(void)
-{
+int main(void) {
     the_answer is;
 
     if (*is.answer == 42) {
@@ -98,27 +88,21 @@ int main(void)
 #include <iostream>
 #include <stdexcept>
 
-class the_answer
-{
+class the_answer {
 public:
+    int* answer{};
 
-    int *answer{};
-
-    the_answer() :
-        answer{new int}
-    {
+    the_answer() : answer{new int} {
         *answer = 43;
     }
 
-    ~the_answer()
-    {
+    ~the_answer() {
         std::cout << "The answer is not: " << *answer << '\n';
         delete answer;
     }
 };
 
-void foo()
-{
+void foo() {
     the_answer is;
 
     if (*is.answer == 42) {
@@ -128,13 +112,11 @@ void foo()
     throw std::runtime_error("");
 }
 
-int main(void)
-{
+int main(void) {
     try {
         foo();
+    } catch (...) {
     }
-    catch(...)
-    { }
 
     return 0;
 }
@@ -149,27 +131,20 @@ int main(void)
 #include <iostream>
 #include <stdexcept>
 
-template<typename FUNC>
-class finally
-{
+template <typename FUNC>
+class finally {
     FUNC m_func;
 
 public:
-    finally(FUNC func) :
-        m_func{func}
-    { }
+    finally(FUNC func) : m_func{func} {}
 
-    ~finally()
-    {
+    ~finally() {
         m_func();
     }
 };
 
-int main(void)
-{
-    auto execute_on_exit = finally{[]{
-        std::cout << "The answer is: 42\n";
-    }};
+int main(void) {
+    auto execute_on_exit = finally{[] { std::cout << "The answer is: 42\n"; }};
 }
 
 // The answer is: 42
@@ -182,35 +157,27 @@ int main(void)
 #include <iostream>
 #include <stdexcept>
 
-template<typename FUNC>
-class finally
-{
+template <typename FUNC>
+class finally {
     FUNC m_func;
 
 public:
-    finally(FUNC func) :
-        m_func{func}
-    { }
+    finally(FUNC func) : m_func{func} {}
 
-    ~finally()
-    {
+    ~finally() {
         m_func();
     }
 };
 
-int main(void)
-{
+int main(void) {
     try {
-        auto execute_on_exit = finally{[]{
-            std::cout << "The answer is: 42\n";
-        }};
+        auto execute_on_exit = finally{[] { std::cout << "The answer is: 42\n"; }};
 
         std::cout << "step 1: Collect answers\n";
         throw std::runtime_error("???");
         std::cout << "step 3: Profit\n";
+    } catch (...) {
     }
-    catch (...)
-    { }
 }
 
 // step 1: Collect answers

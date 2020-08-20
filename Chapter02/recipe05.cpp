@@ -28,22 +28,18 @@
 #include <iostream>
 #include <stdexcept>
 
-class the_answer : public std::exception
-{
+class the_answer : public std::exception {
 public:
     the_answer() = default;
-    const char *what() const noexcept
-    {
+    const char* what() const noexcept {
         return "The answer is: 42";
     }
 };
 
-int main(void)
-{
+int main(void) {
     try {
         throw the_answer{};
-    }
-    catch (const std::exception &e) {
+    } catch (const std::exception& e) {
         std::cout << e.what() << '\n';
     }
 }
@@ -58,27 +54,21 @@ int main(void)
 #include <iostream>
 #include <stdexcept>
 
-class the_answer : public std::exception
-{
-    const char *m_str;
+class the_answer : public std::exception {
+    const char* m_str;
+
 public:
+    the_answer(const char* str) : m_str{str} {}
 
-    the_answer(const char *str) :
-        m_str{str}
-    { }
-
-    const char *what() const noexcept
-    {
+    const char* what() const noexcept {
         return m_str;
     }
 };
 
-int main(void)
-{
+int main(void) {
     try {
         throw the_answer("42");
-    }
-    catch (const std::exception &e) {
+    } catch (const std::exception& e) {
         std::cout << "The answer is: " << e.what() << '\n';
     }
 }
@@ -90,27 +80,22 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE03
 
-#include <iostream>
-#include <stdexcept>
 #include <string.h>
 
-class the_answer : public std::runtime_error
-{
+#include <iostream>
+#include <stdexcept>
+
+class the_answer : public std::runtime_error {
 public:
-    explicit the_answer(const char *str) :
-        std::runtime_error{str}
-    { }
+    explicit the_answer(const char* str) : std::runtime_error{str} {}
 };
 
-int main(void)
-{
+int main(void) {
     try {
         throw the_answer("42");
-    }
-    catch (const the_answer &e) {
+    } catch (const the_answer& e) {
         std::cout << "The answer is: " << e.what() << '\n';
-    }
-    catch (const std::exception &e) {
+    } catch (const std::exception& e) {
         std::cout << "unknown exception: " << e.what() << '\n';
     }
 }
