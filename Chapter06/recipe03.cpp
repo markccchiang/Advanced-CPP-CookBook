@@ -22,9 +22,7 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-int main(void)
-{
-}
+int main(void) {}
 
 // > valgrind ./recipe03_example01
 // ==8260== Memcheck, a memory error detector
@@ -75,8 +73,7 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
-int main(void)
-{
+int main(void) {
     auto ptr = new int;
     delete ptr;
 }
@@ -133,8 +130,7 @@ int main(void)
 #include <vector>
 std::vector<int> data;
 
-int main(void)
-{
+int main(void) {
     for (auto i = 0; i < 10000; i++) {
         data.push_back(i);
     }
@@ -164,8 +160,7 @@ int main(void)
 #include <vector>
 std::vector<int> data;
 
-int main(void)
-{
+int main(void) {
     data.reserve(10000);
 
     for (auto i = 0; i < 10000; i++) {
@@ -199,8 +194,7 @@ int main(void)
 
 std::any data;
 
-int main(void)
-{
+int main(void) {
     data = 42;
     data = std::string{"The answer is: 42"};
 }
@@ -231,8 +225,7 @@ int main(void)
 
 std::any data;
 
-int main(void)
-{
+int main(void) {
     data = 42;
     data = std::string{"The answer is: 42"};
     data = 42;
@@ -264,13 +257,12 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE07
 
-#include <variant>
 #include <string>
+#include <variant>
 
 std::variant<int, std::string> data;
 
-int main(void)
-{
+int main(void) {
     data = 42;
     data = std::string{"The answer is: 42"};
 }

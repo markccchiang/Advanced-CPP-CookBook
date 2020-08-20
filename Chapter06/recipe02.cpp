@@ -22,8 +22,7 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-int main(void)
-{ }
+int main(void) {}
 
 // > objdump -d recipe02_example01
 
@@ -55,8 +54,7 @@ int main(void)
 
 volatile int data[1000];
 
-int main(void)
-{
+int main(void) {
     for (auto i = 0U; i < 1000; i++) {
         data[i] = 42;
     }
@@ -81,8 +79,7 @@ int main(void)
 
 volatile int data[4];
 
-int main(void)
-{
+int main(void) {
     for (auto i = 0U; i < 4; i++) {
         data[i] = 42;
     }
@@ -106,13 +103,11 @@ struct mydata {
     int data[100];
 };
 
-void foo(mydata d)
-{
-    (void) d;
+void foo(mydata d) {
+    (void)d;
 }
 
-int main(void)
-{
+int main(void) {
     mydata d;
     foo(d);
 }
@@ -145,13 +140,11 @@ struct mydata {
     int data[100];
 };
 
-void foo(mydata &d)
-{
-    (void) d;
+void foo(mydata& d) {
+    (void)d;
 }
 
-int main(void)
-{
+int main(void) {
     mydata d;
     foo(d);
 }

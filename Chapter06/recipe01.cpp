@@ -22,19 +22,17 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
+#include <hayai.hpp>
 #include <string>
 #include <vector>
-#include <hayai.hpp>
 
 std::vector<std::string> data;
 
-BENCHMARK(vector, push_back, 10, 100)
-{
+BENCHMARK(vector, push_back, 10, 100) {
     data.push_back("The answer is: 42");
 }
 
-BENCHMARK(vector, emplace_back, 10, 100)
-{
+BENCHMARK(vector, emplace_back, 10, 100) {
     data.emplace_back("The answer is: 42");
 }
 
@@ -52,13 +50,11 @@ BENCHMARK(vector, emplace_back, 10, 100)
 
 volatile int data = 0;
 
-void foo()
-{
+void foo() {
     data++;
 }
 
-int main(void)
-{
+int main(void) {
     for (auto i = 0; i < 100000; i++) {
         foo();
     }

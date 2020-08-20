@@ -22,30 +22,25 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-class myclass
-{
+class myclass {
     int answer;
 
 public:
-    ~myclass()
-    {
+    ~myclass() {
         answer = 42;
     }
 };
 
-void foo()
-{
+void foo() {
     throw 42;
 }
 
-int main(void)
-{
+int main(void) {
     myclass c;
 
     try {
         foo();
-    }
-    catch (...) {
+    } catch (...) {
     }
 }
 
@@ -60,30 +55,25 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
-class myclass
-{
+class myclass {
     int answer;
 
 public:
-    ~myclass()
-    {
+    ~myclass() {
         answer = 42;
     }
 };
 
-void foo()
-{
+void foo() {
     throw 42;
 }
 
-int main(void) noexcept
-{
+int main(void) noexcept {
     myclass c;
 
     try {
         foo();
-    }
-    catch (...) {
+    } catch (...) {
     }
 }
 
