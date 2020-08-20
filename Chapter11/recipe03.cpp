@@ -24,84 +24,66 @@
 
 #include <iostream>
 
-class margin
-{
+class margin {
 public:
-    int width()
-    {
+    int width() {
         return 32;
     }
 };
 
-class button : public margin
-{
+class button : public margin {
 public:
-    int width()
-    {
+    int width() {
         return margin::width() + 10;
     }
 };
 
-int main()
-{
+int main() {
     auto b = new button();
     std::cout << "button width: " << b->width() << '\n';
 }
-
 
 #endif
 
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
-#include <memory>
 #include <iostream>
+#include <memory>
 
-class base
-{
+class base {
 public:
     virtual int width() = 0;
 };
 
-class button : public base
-{
+class button : public base {
 public:
-    int width()
-    {
+    int width() {
         return 10;
     }
 };
 
-class decorator : public base
-{
+class decorator : public base {
     std::unique_ptr<base> m_base;
 
 public:
-    decorator(std::unique_ptr<base> b) :
-        m_base{std::move(b)}
-    { }
+    decorator(std::unique_ptr<base> b) : m_base{std::move(b)} {}
 
-    int width()
-    {
+    int width() {
         return m_base->width();
     }
 };
 
-class margin : public decorator
-{
+class margin : public decorator {
 public:
-    margin(std::unique_ptr<base> b) :
-        decorator{std::move(b)}
-    { }
+    margin(std::unique_ptr<base> b) : decorator{std::move(b)} {}
 
-    int width()
-    {
+    int width() {
         return decorator::width() + 32;
     }
 };
 
-int main()
-{
+int main() {
     auto button1 = std::make_unique<button>();
     auto button2 = std::make_unique<margin>(std::make_unique<button>());
 
@@ -114,60 +96,43 @@ int main()
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE03
 
-#include <memory>
 #include <iostream>
+#include <memory>
 
-class base
-{
+class base {
 public:
     virtual int width() = 0;
 };
 
-class button : public base
-{
+class button : public base {
 public:
-    int width()
-    {
+    int width() {
         return 10;
     }
 };
 
-class decorator : public base
-{
+class decorator : public base {
     std::unique_ptr<base> m_base;
 
 public:
-    decorator(std::unique_ptr<base> b) :
-        m_base{std::move(b)}
-    { }
+    decorator(std::unique_ptr<base> b) : m_base{std::move(b)} {}
 
-    int width()
-    {
+    int width() {
         return m_base->width();
     }
 };
 
-class margin : public decorator
-{
+class margin : public decorator {
 public:
-    margin(std::unique_ptr<base> b) :
-        decorator{std::move(b)}
-    { }
+    margin(std::unique_ptr<base> b) : decorator{std::move(b)} {}
 
-    int width()
-    {
+    int width() {
         return decorator::width() + 32;
     }
 };
 
-int main()
-{
-    auto b =
-        std::make_unique<margin>(
-            std::make_unique<margin>(
-                std::make_unique<button>()
-            )
-        );
+int main() {
+    auto b = std::make_unique<margin>(std::make_unique<margin>(std::make_unique<button>()));
 
     std::cout << "button width: " << b->width() << '\n';
 }
@@ -177,94 +142,69 @@ int main()
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE04
 
-#include <memory>
 #include <iostream>
+#include <memory>
 
-class base
-{
+class base {
 public:
     virtual int width() = 0;
     virtual int content_width() = 0;
 };
 
-class button : public base
-{
+class button : public base {
 public:
-    int width()
-    {
+    int width() {
         return 10;
     }
 
-    int content_width()
-    {
+    int content_width() {
         return width() - 1;
     }
 };
 
-class decorator : public base
-{
+class decorator : public base {
     std::unique_ptr<base> m_base;
 
 public:
-    decorator(std::unique_ptr<base> b) :
-        m_base{std::move(b)}
-    { }
+    decorator(std::unique_ptr<base> b) : m_base{std::move(b)} {}
 
-    int width()
-    {
+    int width() {
         return m_base->width();
     }
 
-    int content_width()
-    {
+    int content_width() {
         return m_base->content_width();
     }
 };
 
-class margin : public decorator
-{
+class margin : public decorator {
 public:
-    margin(std::unique_ptr<base> b) :
-        decorator{std::move(b)}
-    { }
+    margin(std::unique_ptr<base> b) : decorator{std::move(b)} {}
 
-    int width()
-    {
+    int width() {
         return decorator::width() + 32;
     }
 
-    int content_width()
-    {
+    int content_width() {
         return decorator::content_width();
     }
 };
 
-class padding : public decorator
-{
+class padding : public decorator {
 public:
-    padding(std::unique_ptr<base> b) :
-        decorator{std::move(b)}
-    { }
+    padding(std::unique_ptr<base> b) : decorator{std::move(b)} {}
 
-    int width()
-    {
+    int width() {
         return decorator::width();
     }
 
-    int content_width()
-    {
+    int content_width() {
         return decorator::content_width() - 5;
     }
 };
 
-int main()
-{
-    auto b =
-        std::make_unique<margin>(
-            std::make_unique<padding>(
-                std::make_unique<button>()
-            )
-        );
+int main() {
+    auto b = std::make_unique<margin>(std::make_unique<padding>(std::make_unique<button>()));
 
     std::cout << "button width: " << b->width() << '\n';
     std::cout << "button content width: " << b->content_width() << '\n';
