@@ -22,35 +22,31 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
+#include <iostream>
 #include <mutex>
 #include <stack>
-#include <iostream>
 
 std::mutex m{};
 
-template<typename S, typename T>
-void push(S &s, T &&t)
-{
+template <typename S, typename T>
+void push(S& s, T&& t) {
     std::lock_guard lock(m);
     s.push(std::forward<T>(t));
 }
 
-template<typename S>
-void pop(S &s)
-{
+template <typename S>
+void pop(S& s) {
     std::lock_guard lock(m);
     s.pop();
 }
 
-template<typename S>
-auto empty(S &s)
-{
+template <typename S>
+auto empty(S& s) {
     std::lock_guard lock(m);
     return s.empty();
 }
 
-int main(void)
-{
+int main(void) {
     std::stack<int> mystack;
 
     push(mystack, 4);
@@ -60,7 +56,7 @@ int main(void)
     push(mystack, 23);
     push(mystack, 42);
 
-    while(empty(mystack)) {
+    while (empty(mystack)) {
         pop(mystack);
     }
 

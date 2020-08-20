@@ -22,40 +22,34 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
+#include <iostream>
 #include <mutex>
 #include <stack>
-#include <iostream>
 
-template<typename T>
-class my_stack
-{
+template <typename T>
+class my_stack {
     std::stack<T> m_stack;
     mutable std::mutex m{};
 
 public:
-
-    template<typename ARG>
-    void push(ARG &&arg)
-    {
+    template <typename ARG>
+    void push(ARG&& arg) {
         std::lock_guard lock(m);
         m_stack.push(std::forward<ARG>(arg));
     }
 
-    void pop()
-    {
+    void pop() {
         std::lock_guard lock(m);
         m_stack.pop();
     }
 
-    auto empty() const
-    {
+    auto empty() const {
         std::lock_guard lock(m);
         return m_stack.empty();
     }
 };
 
-int main(void)
-{
+int main(void) {
     my_stack<int> s;
 
     s.push(4);
@@ -65,7 +59,7 @@ int main(void)
     s.push(23);
     s.push(42);
 
-    while(s.empty()) {
+    while (s.empty()) {
         s.pop();
     }
 

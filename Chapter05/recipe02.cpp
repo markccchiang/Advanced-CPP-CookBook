@@ -23,23 +23,20 @@
 #ifdef EXAMPLE01
 
 #include <atomic>
-#include <thread>
 #include <iostream>
+#include <thread>
 
 int count{};
 std::atomic<int> atomic_count{};
 
-void foo()
-{
+void foo() {
     do {
         count++;
         atomic_count++;
-    }
-    while (atomic_count < 99999);
+    } while (atomic_count < 99999);
 }
 
-int main(void)
-{
+int main(void) {
     std::thread t1{foo};
     std::thread t2{foo};
 

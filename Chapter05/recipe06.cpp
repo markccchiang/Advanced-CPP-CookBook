@@ -25,31 +25,22 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-#include <vector>
-#include <iostream>
 #include <algorithm>
+#include <iostream>
+#include <vector>
 
 constexpr auto size = 1000000;
 
-int main(void)
-{
+int main(void) {
     std::vector<int> numbers1(size);
     std::vector<int> numbers2(size);
     std::vector<int> numbers3(size);
     std::vector<int> numbers4(size);
 
-    std::generate(numbers1.begin(), numbers1.end(), []() {
-	    return rand() % size;
-    });
-    std::generate(numbers2.begin(), numbers2.end(), []() {
-	    return rand() % size;
-    });
-    std::generate(numbers3.begin(), numbers3.end(), []() {
-	    return rand() % size;
-    });
-    std::generate(numbers4.begin(), numbers4.end(), []() {
-	    return rand() % size;
-    });
+    std::generate(numbers1.begin(), numbers1.end(), []() { return rand() % size; });
+    std::generate(numbers2.begin(), numbers2.end(), []() { return rand() % size; });
+    std::generate(numbers3.begin(), numbers3.end(), []() { return rand() % size; });
+    std::generate(numbers4.begin(), numbers4.end(), []() { return rand() % size; });
 
     std::sort(numbers1.begin(), numbers1.end());
     std::sort(numbers2.begin(), numbers2.end());
@@ -74,27 +65,23 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
+#include <algorithm>
 #include <future>
+#include <iostream>
 #include <thread>
 #include <vector>
-#include <iostream>
-#include <algorithm>
 
 constexpr auto size = 1000000;
 
-int foo()
-{
+int foo() {
     std::vector<int> numbers(size);
-    std::generate(numbers.begin(), numbers.end(), []() {
-	    return rand() % size;
-    });
+    std::generate(numbers.begin(), numbers.end(), []() { return rand() % size; });
 
     std::sort(numbers.begin(), numbers.end());
     return numbers.back();
 }
 
-int main(void)
-{
+int main(void) {
     auto a1 = std::async(std::launch::async, foo);
     auto a2 = std::async(std::launch::async, foo);
     auto a3 = std::async(std::launch::async, foo);
@@ -118,27 +105,23 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE03
 
+#include <algorithm>
 #include <future>
+#include <iostream>
 #include <thread>
 #include <vector>
-#include <iostream>
-#include <algorithm>
 
 constexpr auto size = 1000000;
 
-int foo()
-{
+int foo() {
     std::vector<int> numbers(size);
-    std::generate(numbers.begin(), numbers.end(), []() {
-	    return rand() % size;
-    });
+    std::generate(numbers.begin(), numbers.end(), []() { return rand() % size; });
 
     std::sort(numbers.begin(), numbers.end());
     return numbers.back();
 }
 
-int main(void)
-{
+int main(void) {
     auto a1 = std::async(std::launch::deferred, foo);
     auto a2 = std::async(std::launch::deferred, foo);
     auto a3 = std::async(std::launch::deferred, foo);

@@ -22,24 +22,21 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
+#include <iostream>
 #include <mutex>
 #include <thread>
-#include <iostream>
 
 std::mutex m{};
 
-class the_answer
-{
+class the_answer {
 public:
-    void print() const
-    {
+    void print() const {
         std::lock_guard lock(m);
         std::cout << "The answer is: 42\n";
     }
 };
 
-int main(void)
-{
+int main(void) {
     the_answer is;
     is.print();
 
@@ -53,24 +50,21 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
+#include <iostream>
 #include <mutex>
 #include <thread>
-#include <iostream>
 
-class the_answer
-{
+class the_answer {
     std::mutex m{};
 
 public:
-    void print() const
-    {
+    void print() const {
         std::lock_guard lock(m);
         std::cout << "The answer is: 42\n";
     }
 };
 
-int main(void)
-{
+int main(void) {
     the_answer is;
     is.print();
 
@@ -79,7 +73,8 @@ int main(void)
 
 // ...
 // /home/user/book/chapter05/recipe03.cpp:67:31:   required from here
-// /usr/include/c++/9/bits/std_mutex.h:159:9: error: passing ‘std::lock_guard<const std::mutex>::mutex_type’ {aka ‘const std::mutex’} as ‘this’ argument discards qualifiers [-fpermissive]
+// /usr/include/c++/9/bits/std_mutex.h:159:9: error: passing ‘std::lock_guard<const std::mutex>::mutex_type’ {aka ‘const std::mutex’} as
+// ‘this’ argument discards qualifiers [-fpermissive]
 //   159 |       { _M_device.lock(); }
 //       |         ^~~~~~~~~
 // ...
@@ -89,24 +84,21 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE03
 
+#include <iostream>
 #include <mutex>
 #include <thread>
-#include <iostream>
 
-class the_answer
-{
+class the_answer {
     mutable std::mutex m{};
 
 public:
-    void print() const
-    {
+    void print() const {
         std::lock_guard lock(m);
         std::cout << "The answer is: 42\n";
     }
 };
 
-int main(void)
-{
+int main(void) {
     the_answer is;
     is.print();
 

@@ -22,17 +22,15 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-#include <thread>
-#include <iostream>
 #include <future>
+#include <iostream>
+#include <thread>
 
-void foo(std::promise<int> promise)
-{
+void foo(std::promise<int> promise) {
     promise.set_value(42);
 }
 
-int main(void)
-{
+int main(void) {
     std::promise<int> promise;
     auto future = promise.get_future();
 
@@ -51,18 +49,17 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
-#include <thread>
-#include <iostream>
 #include <future>
+#include <iostream>
+#include <thread>
 
-void foo(std::promise<int> promise)
-{
+void foo(std::promise<int> promise) {
     promise.set_value(42);
-    while (true);
+    while (true)
+        ;
 }
 
-int main(void)
-{
+int main(void) {
     std::promise<int> promise;
     auto future = promise.get_future();
 
