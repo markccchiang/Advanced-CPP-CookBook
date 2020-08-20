@@ -22,24 +22,18 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-#include <vector>
 #include <algorithm>
 #include <iostream>
+#include <vector>
 
-template<
-    typename T,
-    typename Compare = std::less<T>,
-    typename Allocator = std::allocator<T>
-    >
-class container
-{
+template <typename T, typename Compare = std::less<T>, typename Allocator = std::allocator<T> >
+class container {
     using vector_type = std::vector<T, Allocator>;
     vector_type m_v;
 
-    void dump()
-    {
+    void dump() {
         std::cout << "elements: ";
-        for (const auto &elem : m_v) {
+        for (const auto& elem : m_v) {
             std::cout << elem << ' ';
         }
 
@@ -47,7 +41,6 @@ class container
     }
 
 public:
-
     using value_type = typename vector_type::value_type;
     using allocator_type = typename vector_type::allocator_type;
     using size_type = typename vector_type::size_type;
@@ -59,80 +52,41 @@ public:
     using compare_type = Compare;
 
 public:
-
     container() noexcept(noexcept(Allocator())) = default;
 
-    explicit container(
-        const Allocator &alloc
-    ) noexcept :
-        m_v(alloc)
-    { }
+    explicit container(const Allocator& alloc) noexcept : m_v(alloc) {}
 
-    container(
-        size_type count,
-        const T &value,
-        const Allocator &alloc = Allocator()
-    ) :
-        m_v(count, value, alloc)
-    { }
+    container(size_type count, const T& value, const Allocator& alloc = Allocator()) : m_v(count, value, alloc) {}
 
-    explicit container(
-        size_type count,
-        const Allocator &alloc = Allocator()
-    ) :
-        m_v(count, alloc)
-    { }
+    explicit container(size_type count, const Allocator& alloc = Allocator()) : m_v(count, alloc) {}
 
-    container(
-        const container &other,
-        const Allocator &alloc
-    ) :
-        m_v(other.m_v, alloc)
-    { }
+    container(const container& other, const Allocator& alloc) : m_v(other.m_v, alloc) {}
 
-    container(
-        container &&other
-    ) noexcept :
-        m_v(std::move(other.m_v))
-    { }
+    container(container&& other) noexcept : m_v(std::move(other.m_v)) {}
 
-    container(
-        container &&other,
-        const Allocator &alloc
-    ) :
-        m_v(std::move(other.m_v), alloc)
-    { }
+    container(container&& other, const Allocator& alloc) : m_v(std::move(other.m_v), alloc) {}
 
-    container(
-        std::initializer_list<T> init,
-        const Allocator &alloc = Allocator()
-    ) :
-        m_v(init, alloc)
-    {
+    container(std::initializer_list<T> init, const Allocator& alloc = Allocator()) : m_v(init, alloc) {
         std::sort(m_v.begin(), m_v.end(), compare_type());
     }
 
 private:
-
-    void push_back(const T &value)
-    {
+    void push_back(const T& value) {
         m_v.push_back(value);
         std::sort(m_v.begin(), m_v.end(), compare_type());
 
         dump();
     }
 
-    void push_back(T &&value)
-    {
+    void push_back(T&& value) {
         m_v.push_back(std::move(value));
         std::sort(m_v.begin(), m_v.end(), compare_type());
 
         dump();
     }
 
-    template<typename... Args>
-    void emplace_back(Args&&... args)
-    {
+    template <typename... Args>
+    void emplace_back(Args&&... args) {
         m_v.emplace_back(std::forward<Args>(args)...);
         std::sort(m_v.begin(), m_v.end(), compare_type());
 
@@ -140,26 +94,21 @@ private:
     }
 
 public:
-
-    void insert(const T &value)
-    {
+    void insert(const T& value) {
         push_back(value);
     }
 
-    void insert(T &&value)
-    {
+    void insert(T&& value) {
         push_back(std::move(value));
     }
 
-    template<typename... Args>
-    void emplace(Args&&... args)
-    {
+    template <typename... Args>
+    void emplace(Args&&... args) {
         emplace_back(std::forward<Args>(args)...);
     }
 };
 
-int main(void)
-{
+int main(void) {
     int i = 42;
     container<int> c;
 
