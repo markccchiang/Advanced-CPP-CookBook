@@ -44,7 +44,7 @@ int main(void)
 
 int main(void)
 {
-    std::tuple t("the answer is: ", 42);
+    std::tuple<std::string, int> t("the answer is: ", 42);
     std::cout << std::get<0>(t) << std::get<1>(t) << '\n';
     return 0;
 }
@@ -60,7 +60,7 @@ int main(void)
 template<typename... Args>
 void foo(Args &&...args)
 {
-    std::tuple t(std::forward<Args>(args)...);
+    std::tuple<Args...> t(std::forward<Args>(args)...);
     std::cout << std::get<0>(t) << std::get<1>(t) << '\n';
 }
 
@@ -116,7 +116,7 @@ for_each(const std::tuple<Args...> &t, FUNCTION &&func)
 template<typename... Args>
 void foo(Args &&...args)
 {
-    std::tuple t(std::forward<Args>(args)...);
+    std::tuple<Args...> t(std::forward<Args>(args)...);
     for_each(t, [](const auto &arg) {
         std::cout << arg;
     });
