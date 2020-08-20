@@ -24,8 +24,7 @@
 
 #include <iostream>
 
-void foo(const int *array, size_t size)
-{
+void foo(const int* array, size_t size) {
     for (auto i = 0; i < size; i++) {
         std::cout << array[i] << ' ';
     }
@@ -33,10 +32,9 @@ void foo(const int *array, size_t size)
     std::cout << '\n';
 }
 
-int main(void)
-{
+int main(void) {
     int array[] = {4, 8, 15, 16, 23, 42};
-    foo(array, sizeof(array)/sizeof(array[0]));
+    foo(array, sizeof(array) / sizeof(array[0]));
 }
 
 #endif
@@ -46,9 +44,8 @@ int main(void)
 
 #include <iostream>
 
-template<size_t N>
-void foo(const int (&array)[N])
-{
+template <size_t N>
+void foo(const int (&array)[N]) {
     for (auto i = 0; i < N; i++) {
         std::cout << array[i] << ' ';
     }
@@ -56,8 +53,7 @@ void foo(const int (&array)[N])
     std::cout << '\n';
 }
 
-int main(void)
-{
+int main(void) {
     int array[] = {4, 8, 15, 16, 23, 42};
     foo(array);
 }
@@ -68,16 +64,15 @@ int main(void)
 #ifdef EXAMPLE03
 
 #include <iostream>
+
 #include "span.hpp"
 
-namespace std
-{
-template<typename T>
+namespace std {
+template <typename T>
 using span = tcb::span<T>;
 }
 
-void foo(const std::span<int> &s)
-{
+void foo(const std::span<int>& s) {
     for (auto i = 0; i < s.size(); i++) {
         std::cout << s[i] << ' ';
     }
@@ -85,8 +80,7 @@ void foo(const std::span<int> &s)
     std::cout << '\n';
 }
 
-int main(void)
-{
+int main(void) {
     int array[] = {4, 8, 15, 16, 23, 42};
     foo(array);
 }
@@ -97,25 +91,23 @@ int main(void)
 #ifdef EXAMPLE04
 
 #include <iostream>
+
 #include "span.hpp"
 
-namespace std
-{
-template<typename T>
+namespace std {
+template <typename T>
 using span = tcb::span<T>;
 }
 
-void foo(const std::span<int> &s)
-{
-    for (const auto &elem : s) {
+void foo(const std::span<int>& s) {
+    for (const auto& elem : s) {
         std::cout << elem << ' ';
     }
 
     std::cout << '\n';
 }
 
-int main(void)
-{
+int main(void) {
     int array[] = {4, 8, 15, 16, 23, 42};
     foo(array);
 }
@@ -125,28 +117,26 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE05
 
+#include <iostream>
 #include <memory>
 #include <vector>
-#include <iostream>
+
 #include "span.hpp"
 
-namespace std
-{
-template<typename T>
+namespace std {
+template <typename T>
 using span = tcb::span<T>;
 }
 
-void foo(const std::span<int> &s)
-{
+void foo(const std::span<int>& s) {
     std::cout << "size: " << s.size() << '\n';
     std::cout << "size (in bytes): " << s.size_bytes() << '\n';
 }
 
-int main(void)
-{
+int main(void) {
     auto ptr1 = new int[6]();
     foo({ptr1, 6});
-    delete [] ptr1;
+    delete[] ptr1;
 
     std::vector<int> v(6);
     foo({v.data(), v.size()});
@@ -161,30 +151,27 @@ int main(void)
 #ifdef EXAMPLE06
 
 #include <iostream>
+
 #include "span.hpp"
 
-namespace std
-{
-template<typename T>
+namespace std {
+template <typename T>
 using span = tcb::span<T>;
 }
 
-void foo2(const std::span<int> &s)
-{
-    for (const auto &elem : s) {
+void foo2(const std::span<int>& s) {
+    for (const auto& elem : s) {
         std::cout << elem << ' ';
     }
 
     std::cout << '\n';
 }
 
-void foo1(const std::span<int> &s)
-{
+void foo1(const std::span<int>& s) {
     foo2(s.subspan(5, 1));
 }
 
-int main(void)
-{
+int main(void) {
     int array[] = {4, 8, 15, 16, 23, 42};
     foo1(array);
 }

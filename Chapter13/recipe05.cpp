@@ -22,12 +22,10 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-#include <vector>
 #include <iostream>
+#include <vector>
 
-auto
-even_numbers(size_t s, size_t e)
-{
+auto even_numbers(size_t s, size_t e) {
     std::vector<int> nums;
 
     if (s % 2 != 0 || e % 2 != 0) {
@@ -41,9 +39,8 @@ even_numbers(size_t s, size_t e)
     return nums;
 }
 
-int main(void)
-{
-    for (const auto &num : even_numbers(0, 10)) {
+int main(void) {
+    for (const auto& num : even_numbers(0, 10)) {
         std::cout << num << ' ';
     }
 
@@ -57,9 +54,7 @@ int main(void)
 
 #include <iostream>
 
-generator<int>
-even_numbers(size_t s, size_t e)
-{
+generator<int> even_numbers(size_t s, size_t e) {
     if (s % 2 != 0 || e % 2 != 0) {
         std::terminate();
     }
@@ -71,9 +66,8 @@ even_numbers(size_t s, size_t e)
     co_return e;
 }
 
-int main(void)
-{
-    for (const auto &num : even_numbers(0, 10)) {
+int main(void) {
+    for (const auto& num : even_numbers(0, 10)) {
         std::cout << num << ' ';
     }
 

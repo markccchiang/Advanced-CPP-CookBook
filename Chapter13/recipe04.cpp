@@ -25,8 +25,7 @@
 #include <iostream>
 #include <range/v3/algorithm/count.hpp>
 
-int main(void)
-{
+int main(void) {
     auto list = {4, 8, 15, 16, 23, 42};
     std::cout << ranges::count(list, 42) << '\n';
 }
@@ -39,8 +38,7 @@ int main(void)
 #include <iostream>
 #include <range/v3/algorithm/find.hpp>
 
-int main(void)
-{
+int main(void) {
     auto list = {4, 8, 15, 16, 23, 42};
     if (auto i = ranges::find(list, 42); i != ranges::end(list)) {
         std::cout << *i << '\n';
@@ -55,8 +53,7 @@ int main(void)
 #include <iostream>
 #include <range/v3/algorithm/find.hpp>
 
-int main(void)
-{
+int main(void) {
     int list[] = {4, 8, 15, 16, 23, 42};
     if (auto i = ranges::find(list, 42); i != ranges::end(list)) {
         std::cout << *i << '\n';
@@ -71,13 +68,10 @@ int main(void)
 #include <iostream>
 #include <range/v3/algorithm/for_each.hpp>
 
-int main(void)
-{
+int main(void) {
     auto list = {4, 8, 15, 16, 23, 42};
 
-    ranges::for_each(list, [](const int &val){
-        std::cout << val << ' ';
-    });
+    ranges::for_each(list, [](const int& val) { std::cout << val << ' '; });
 
     std::cout << '\n';
 }
@@ -90,31 +84,24 @@ int main(void)
 #include <iostream>
 #include <range/v3/view/transform.hpp>
 
-class my_type
-{
+class my_type {
     int m_i;
 
 public:
-    my_type(int i) :
-        m_i{i}
-    { }
+    my_type(int i) : m_i{i} {}
 
-    auto get() const
-    {
+    auto get() const {
         return m_i;
     }
 };
 
-int main(void)
-{
+int main(void) {
     using namespace ranges::views;
 
     auto list1 = {4, 8, 15, 16, 23, 42};
-    auto list2 = list1 | transform([](int val){
-        return my_type(val);
-    });
+    auto list2 = list1 | transform([](int val) { return my_type(val); });
 
-    for(const auto &elem : list2) {
+    for (const auto& elem : list2) {
         std::cout << elem.get() << ' ';
     }
 
@@ -126,18 +113,17 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE06
 
-#include <vector>
 #include <iostream>
 #include <range/v3/action/sort.hpp>
+#include <vector>
 
-int main(void)
-{
+int main(void) {
     using namespace ranges;
 
     std::vector<int> list = {4, 42, 15, 8, 23, 16};
     list |= actions::sort;
 
-    for(const auto &elem : list) {
+    for (const auto& elem : list) {
         std::cout << elem << ' ';
     }
 

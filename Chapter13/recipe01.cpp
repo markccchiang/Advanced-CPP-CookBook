@@ -24,50 +24,38 @@
 
 #include <iostream>
 
-class interface
-{
+class interface {
 public:
     virtual ~interface() = default;
     virtual void foo() = 0;
 };
 
-class A :
-    public interface
-{
+class A : public interface {
 public:
-    void foo() override
-    {
+    void foo() override {
         std::cout << "The answer is: 42\n";
     }
 };
 
-class B :
-    public interface
-{
+class B : public interface {
 public:
-    void foo() override
-    {
+    void foo() override {
         std::cout << "The answer is not: 43\n";
     }
 };
 
-class client
-{
-    interface &m_i;
+class client {
+    interface& m_i;
 
 public:
-    client(interface &i) :
-        m_i{i}
-    { }
+    client(interface& i) : m_i{i} {}
 
-    void bar()
-    {
+    void bar() {
         m_i.foo();
     }
 };
 
-int main(void)
-{
+int main(void) {
     A a;
     B b;
 
@@ -88,54 +76,41 @@ int main(void)
 
 #include <iostream>
 
-template<typename DERIVED>
-class interface
-{
+template <typename DERIVED>
+class interface {
 public:
-    constexpr void foo()
-    {
-        static_cast<DERIVED *>(this)->foo_override();
+    constexpr void foo() {
+        static_cast<DERIVED*>(this)->foo_override();
     }
 };
 
-class A :
-    public interface<A>
-{
+class A : public interface<A> {
 public:
-    void foo_override()
-    {
+    void foo_override() {
         std::cout << "The answer is: 42\n";
     }
 };
 
-class B :
-    public interface<B>
-{
+class B : public interface<B> {
 public:
-    void foo_override()
-    {
+    void foo_override() {
         std::cout << "The answer is not: 43\n";
     }
 };
 
-template<typename T>
-class client
-{
-    interface<T> &m_i;
+template <typename T>
+class client {
+    interface<T>& m_i;
 
 public:
-    client(interface<T> &i) :
-        m_i{i}
-    { }
+    client(interface<T>& i) : m_i{i} {}
 
-    void bar()
-    {
+    void bar() {
         m_i.foo();
     }
 };
 
-int main(void)
-{
+int main(void) {
     A a;
     B b;
 
@@ -156,34 +131,27 @@ int main(void)
 
 #include <iostream>
 
-template<typename DERIVED>
-class interface
-{
+template <typename DERIVED>
+class interface {
 public:
-    constexpr void foo()
-    {
-        static_cast<DERIVED *>(this)->foo_override();
+    constexpr void foo() {
+        static_cast<DERIVED*>(this)->foo_override();
     }
 };
 
-template<typename T>
-class client
-{
-    interface<T> &m_i;
+template <typename T>
+class client {
+    interface<T>& m_i;
 
 public:
-    client(interface<T> &i) :
-        m_i{i}
-    { }
+    client(interface<T>& i) : m_i{i} {}
 
-    void bar()
-    {
+    void bar() {
         m_i.foo();
     }
 };
 
-int main(void)
-{
+int main(void) {
     client c(std::cout);
 }
 
@@ -218,47 +186,38 @@ int main(void)
 #include <iostream>
 
 template <typename T>
-concept interface = requires(T t)
-{
-    { t.foo() } -> void;
+concept interface = requires(T t) {
+    { t.foo() }
+    ->void;
 };
 
-class A
-{
+class A {
 public:
-    void foo()
-    {
+    void foo() {
         std::cout << "The answer is: 42\n";
     }
 };
 
-class B
-{
+class B {
 public:
-    void foo()
-    {
+    void foo() {
         std::cout << "The answer is not: 43\n";
     }
 };
 
-template<interface T>
-class client
-{
-    T &m_i;
+template <interface T>
+class client {
+    T& m_i;
 
 public:
-    client(T &i) :
-        m_i{i}
-    { }
+    client(T& i) : m_i{i} {}
 
-    void bar()
-    {
+    void bar() {
         m_i.foo();
     }
 };
 
-int main(void)
-{
+int main(void) {
     A a;
     B b;
 
@@ -273,4 +232,3 @@ int main(void)
 
 // The answer is: 42
 // The answer is not: 43
-

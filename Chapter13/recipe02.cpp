@@ -24,8 +24,7 @@
 
 #include <iostream>
 
-int main(void)
-{
+int main(void) {
     std::cout << "Hello World\n";
 }
 
@@ -36,8 +35,7 @@ int main(void)
 
 import std.core;
 
-int main(void)
-{
+int main(void) {
     std::cout << "Hello World\n";
 }
 
@@ -48,12 +46,10 @@ int main(void)
 
 #include <string>
 
-template<size_t number>
-class the_answer
-{
+template <size_t number>
+class the_answer {
 public:
-    auto operator()() const
-    {
+    auto operator()() const {
         return "The answer is: " + std::to_string(number);
     }
 };
@@ -63,8 +59,7 @@ public:
 #include <iostream>
 // #include "header.h"
 
-int main(void)
-{
+int main(void) {
     the_answer<42> is;
     std::cout << is() << '\n';
 }
@@ -77,13 +72,10 @@ int main(void)
 import std.string;
 export module answers;
 
-export
-template<size_t number>
-class the_answer
-{
+export template <size_t number>
+class the_answer {
 public:
-    auto operator()() const
-    {
+    auto operator()() const {
         return "The answer is: " + std::to_string(number);
     }
 };
@@ -93,8 +85,7 @@ public:
 import answers;
 import std.core;
 
-int main(void)
-{
+int main(void) {
     the_answer<42> is;
     std::cout << is() << '\n';
 }
