@@ -24,38 +24,31 @@
 
 #include <iostream>
 
-struct the_answer_noexcept
-{
+struct the_answer_noexcept {
     the_answer_noexcept() = default;
 
-    the_answer_noexcept(const the_answer_noexcept &is) noexcept
-    {
+    the_answer_noexcept(const the_answer_noexcept& is) noexcept {
         std::cout << "l-value\n";
     }
 
-    the_answer_noexcept(the_answer_noexcept &&is) noexcept
-    {
+    the_answer_noexcept(the_answer_noexcept&& is) noexcept {
         std::cout << "r-value\n";
     }
 };
 
-struct the_answer_can_throw
-{
+struct the_answer_can_throw {
     the_answer_can_throw() = default;
 
-    the_answer_can_throw(const the_answer_can_throw &is)
-    {
+    the_answer_can_throw(const the_answer_can_throw& is) {
         std::cout << "l-value\n";
     }
 
-    the_answer_can_throw(the_answer_can_throw &&is)
-    {
+    the_answer_can_throw(the_answer_can_throw&& is) {
         std::cout << "r-value\n";
     }
 };
 
-int main(void)
-{
+int main(void) {
     the_answer_noexcept is1;
     the_answer_can_throw is2;
 
@@ -63,7 +56,7 @@ int main(void)
     auto is3 = std::move_if_noexcept(is1);
 
     std::cout << "can throw: ";
-    auto is4  = std::move_if_noexcept(is2);
+    auto is4 = std::move_if_noexcept(is2);
 
     return 0;
 }
@@ -76,24 +69,18 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
-#include <memory>
 #include <iostream>
+#include <memory>
 #include <stdexcept>
 
-template<typename T>
-class mock_vector
-{
+template <typename T>
+class mock_vector {
 public:
     using size_type = std::size_t;
 
-    mock_vector(size_type s) :
-        m_size{s},
-        m_buffer{std::make_unique<T[]>(m_size)}
-    { }
+    mock_vector(size_type s) : m_size{s}, m_buffer{std::make_unique<T[]>(m_size)} {}
 
-    void resize(size_type size)
-        noexcept(std::is_nothrow_move_constructible_v<T>)
-    {
+    void resize(size_type size) noexcept(std::is_nothrow_move_constructible_v<T>) {
         auto tmp = std::make_unique<T[]>(size);
 
         for (size_type i = 0; i < m_size; i++) {
@@ -109,62 +96,51 @@ private:
     std::unique_ptr<T[]> m_buffer{};
 };
 
-struct suboptimal
-{
+struct suboptimal {
     suboptimal() = default;
 
-    suboptimal(suboptimal &&other)
-    {
+    suboptimal(suboptimal&& other) {
         *this = std::move(other);
     }
 
-    suboptimal &operator=(suboptimal &&)
-    {
+    suboptimal& operator=(suboptimal&&) {
         std::cout << "move\n";
         return *this;
     }
 
-    suboptimal(const suboptimal &other)
-    {
+    suboptimal(const suboptimal& other) {
         *this = other;
     }
 
-    suboptimal &operator=(const suboptimal &)
-    {
+    suboptimal& operator=(const suboptimal&) {
         std::cout << "copy\n";
         return *this;
     }
 };
 
-struct optimal
-{
+struct optimal {
     optimal() = default;
 
-    optimal(optimal &&other) noexcept
-    {
+    optimal(optimal&& other) noexcept {
         *this = std::move(other);
     }
 
-    optimal &operator=(optimal &&) noexcept
-    {
+    optimal& operator=(optimal&&) noexcept {
         std::cout << "move\n";
         return *this;
     }
 
-    optimal(const optimal &other)
-    {
+    optimal(const optimal& other) {
         *this = other;
     }
 
-    optimal &operator=(const optimal &)
-    {
+    optimal& operator=(const optimal&) {
         std::cout << "copy\n";
         return *this;
     }
 };
 
-int main(void)
-{
+int main(void) {
     mock_vector<optimal> d1(5);
     mock_vector<suboptimal> d2(5);
 

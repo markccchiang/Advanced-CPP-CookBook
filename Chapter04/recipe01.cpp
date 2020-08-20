@@ -24,25 +24,21 @@
 
 #include <iostream>
 
-struct the_answer
-{
+struct the_answer {
     using type = unsigned;
 };
 
-template<typename T>
-void foo(typename T::type t)
-{
+template <typename T>
+void foo(typename T::type t) {
     std::cout << "The answer is not: " << t << '\n';
 }
 
-template<typename T>
-void foo(T t)
-{
+template <typename T>
+void foo(T t) {
     std::cout << "The answer is: " << t << '\n';
 }
 
-int main(void)
-{
+int main(void) {
     foo<the_answer>(23);
     foo<int>(42);
 
@@ -60,25 +56,22 @@ int main(void)
 #include <iostream>
 #include <type_traits>
 
-template<typename T>
-constexpr auto is_int()
-{ return false; }
+template <typename T>
+constexpr auto is_int() {
+    return false;
+}
 
-template<>
-constexpr auto is_int<int>()
-{ return true; }
+template <>
+constexpr auto is_int<int>() {
+    return true;
+}
 
-template<
-    typename T,
-    std::enable_if_t<is_int<T>(), int> = 0
-    >
-void the_answer(T is)
-{
+template <typename T, std::enable_if_t<is_int<T>(), int> = 0>
+void the_answer(T is) {
     std::cout << "The answer is: " << is << '\n';
 }
 
-int main(void)
-{
+int main(void) {
     the_answer(42);
     return 0;
 }
@@ -93,17 +86,12 @@ int main(void)
 #include <iostream>
 #include <type_traits>
 
-template<
-    typename T,
-    std::enable_if_t<std::is_integral_v<T>>* = nullptr
-    >
-void the_answer(T is)
-{
+template <typename T, std::enable_if_t<std::is_integral_v<T>>* = nullptr>
+void the_answer(T is) {
     std::cout << "The answer is: " << is << '\n';
 }
 
-int main(void)
-{
+int main(void) {
     the_answer(42);
     return 0;
 }
@@ -118,15 +106,12 @@ int main(void)
 #include <iostream>
 #include <type_traits>
 
-template<typename T>
-std::enable_if_t<std::is_integral_v<T>>
-the_answer(T is)
-{
+template <typename T>
+std::enable_if_t<std::is_integral_v<T>> the_answer(T is) {
     std::cout << "The answer is: " << is << '\n';
 }
 
-int main(void)
-{
+int main(void) {
     the_answer(42);
     return 0;
 }
@@ -138,31 +123,22 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE05
 
+#include <iomanip>
 #include <iostream>
 #include <type_traits>
-#include <iomanip>
 
-template<
-    typename T,
-    std::enable_if_t<std::is_integral_v<T>>* = nullptr
-    >
-void the_answer(T is)
-{
+template <typename T, std::enable_if_t<std::is_integral_v<T>>* = nullptr>
+void the_answer(T is) {
     std::cout << "The answer is: " << is << '\n';
 }
 
-template<
-    typename T,
-    std::enable_if_t<std::is_floating_point_v<T>>* = nullptr
-    >
-void the_answer(T is)
-{
+template <typename T, std::enable_if_t<std::is_floating_point_v<T>>* = nullptr>
+void the_answer(T is) {
     std::cout << std::setprecision(10);
     std::cout << "The answer is: " << is << '\n';
 }
 
-int main(void)
-{
+int main(void) {
     the_answer(42);
     the_answer(42U);
     the_answer(42.12345678);

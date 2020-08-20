@@ -26,12 +26,10 @@
 
 constexpr auto answer = 42;
 
-int main(void)
-{
+int main(void) {
     if constexpr (answer == 42) {
         std::cout << "The answer is: " << answer << '\n';
-    }
-    else {
+    } else {
         std::cout << "The answer is not: " << answer << '\n';
     }
 
@@ -45,12 +43,11 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 
-template<typename T>
-constexpr void foo(T &&t)
-{
+template <typename T>
+constexpr void foo(T&& t) {
     if constexpr (std::is_floating_point_v<T>) {
         std::cout << std::setprecision(10);
     }
@@ -58,8 +55,7 @@ constexpr void foo(T &&t)
     std::cout << "The answer is: " << std::forward<T>(t) << '\n';
 }
 
-int main(void)
-{
+int main(void) {
     foo(42);
     foo(42.12345678);
     return 0;

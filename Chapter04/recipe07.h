@@ -19,9 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-template<typename T>
-struct the_answer
-{
+template <typename T>
+struct the_answer {
     T m_answer;
 
     the_answer(T t);

@@ -24,11 +24,9 @@
 
 #include <iostream>
 
-template<typename T>
-struct the_answer
-{
-    the_answer(T t)
-    {
+template <typename T>
+struct the_answer {
+    the_answer(T t) {
         std::cout << "The answer is: " << t << '\n';
     }
 };
@@ -37,8 +35,7 @@ template class the_answer<int>;
 template class the_answer<unsigned>;
 template class the_answer<double>;
 
-int main(void)
-{
+int main(void) {
     the_answer{42};
     the_answer{42U};
     the_answer{42.1};
@@ -57,8 +54,7 @@ int main(void)
 
 #include "recipe07.h"
 
-int main(void)
-{
+int main(void) {
     the_answer is{42};
     is.print();
 

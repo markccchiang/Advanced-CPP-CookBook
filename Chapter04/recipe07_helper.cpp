@@ -20,16 +20,14 @@
 // SOFTWARE.
 
 #include <iostream>
+
 #include "recipe07.h"
 
-template<typename T>
-the_answer<T>::the_answer(T t) :
-    m_answer{t}
-{ }
+template <typename T>
+the_answer<T>::the_answer(T t) : m_answer{t} {}
 
-template<typename T>
-void the_answer<T>::print()
-{
+template <typename T>
+void the_answer<T>::print() {
     std::cout << "The answer is: " << m_answer << '\n';
 }
 

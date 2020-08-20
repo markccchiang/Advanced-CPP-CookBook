@@ -24,27 +24,22 @@
 
 #include <iostream>
 
-struct the_answer
-{ };
+struct the_answer {};
 
-void foo2(const the_answer &is)
-{
+void foo2(const the_answer& is) {
     std::cout << "l-value\n";
 }
 
-void foo2(the_answer &&is)
-{
+void foo2(the_answer&& is) {
     std::cout << "r-value\n";
 }
 
-template<typename T>
-void foo1(T &&t)
-{
+template <typename T>
+void foo1(T&& t) {
     foo2(t);
 }
 
-int main(void)
-{
+int main(void) {
     the_answer is;
     foo1(is);
     foo1(the_answer());
@@ -62,27 +57,22 @@ int main(void)
 
 #include <iostream>
 
-struct the_answer
-{ };
+struct the_answer {};
 
-void foo2(const the_answer &is)
-{
+void foo2(const the_answer& is) {
     std::cout << "l-value\n";
 }
 
-void foo2(the_answer &&is)
-{
+void foo2(the_answer&& is) {
     std::cout << "r-value\n";
 }
 
-template<typename T>
-void foo1(T &&t)
-{
+template <typename T>
+void foo1(T&& t) {
     foo2(std::forward<T>(t));
 }
 
-int main(void)
-{
+int main(void) {
     the_answer is;
     foo1(is);
     foo1(the_answer());
@@ -100,27 +90,22 @@ int main(void)
 
 #include <iostream>
 
-struct the_answer
-{ };
+struct the_answer {};
 
-void foo2(const the_answer &is, int i)
-{
+void foo2(const the_answer& is, int i) {
     std::cout << "l-value: " << i << '\n';
 }
 
-void foo2(the_answer &&is, int i)
-{
+void foo2(the_answer&& is, int i) {
     std::cout << "r-value: " << i << '\n';
 }
 
-template<typename... Args>
-void foo1(Args &&...args)
-{
+template <typename... Args>
+void foo1(Args&&... args) {
     foo2(std::forward<Args>(args)...);
 }
 
-int main(void)
-{
+int main(void) {
     the_answer is;
     foo1(is, 42);
     foo1(the_answer(), 42);
