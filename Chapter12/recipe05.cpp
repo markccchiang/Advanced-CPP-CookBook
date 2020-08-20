@@ -22,36 +22,27 @@
 #include <iostream>
 
 template <typename T>
-constexpr auto type_info()
-{
+constexpr auto type_info() {
     std::string_view name{__PRETTY_FUNCTION__};
     name.remove_prefix(37);
     name.remove_suffix(1);
     return name;
 }
 
-#define show_type(a)                            \
-    std::cout << #a                             \
-              << " = "                          \
-              << type_info<decltype(a)>()       \
-              << '\n';                          \
+#define show_type(a) std::cout << #a << " = " << type_info<decltype(a)>() << '\n';
 
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-template<typename T>
-class the_answer
-{
-
+template <typename T>
+class the_answer {
 public:
-    the_answer(T t)
-    {
+    the_answer(T t) {
         show_type(t);
     }
 };
 
-int main(void)
-{
+int main(void) {
     the_answer<unsigned> is_1(42);
     the_answer is_2(42);
 }
@@ -61,21 +52,17 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
-template<typename T>
-class the_answer
-{
-
+template <typename T>
+class the_answer {
 public:
-    the_answer(T t)
-    {
+    the_answer(T t) {
         show_type(t);
     }
 };
 
-the_answer(int) -> the_answer<unsigned>;
+the_answer(int)->the_answer<unsigned>;
 
-int main(void)
-{
+int main(void) {
     the_answer is(42);
 }
 
@@ -84,21 +71,17 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE03
 
-template<typename T>
-class the_answer
-{
-
+template <typename T>
+class the_answer {
 public:
-    the_answer(T t)
-    {
+    the_answer(T t) {
         show_type(t);
     }
 };
 
-the_answer(const char *) -> the_answer<std::string>;
+the_answer(const char*)->the_answer<std::string>;
 
-int main(void)
-{
+int main(void) {
     the_answer is("The answer is: 42");
 }
 

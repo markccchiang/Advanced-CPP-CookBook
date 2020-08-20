@@ -22,36 +22,27 @@
 #include <iostream>
 
 template <typename T>
-constexpr auto type_info()
-{
+constexpr auto type_info() {
     std::string_view name{__PRETTY_FUNCTION__};
     name.remove_prefix(37);
     name.remove_suffix(1);
     return name;
 }
 
-#define show_type(a)                            \
-    std::cout << #a                             \
-              << " = "                          \
-              << type_info<decltype(a)>()       \
-              << '\n';                          \
+#define show_type(a) std::cout << #a << " = " << type_info<decltype(a)>() << '\n';
 
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-template<typename T>
-class the_answer
-{
-
+template <typename T>
+class the_answer {
 public:
-    the_answer(T t)
-    {
+    the_answer(T t) {
         show_type(t);
     }
 };
 
-int main(void)
-{
+int main(void) {
     the_answer<int> is_1(42);
     the_answer is_2(42);
 }
@@ -61,42 +52,33 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
-template<typename T>
-class the_answer
-{
-
+template <typename T>
+class the_answer {
 public:
-    the_answer(T &t)
-    {
+    the_answer(T& t) {
         show_type(t);
     }
 };
 
-int main(void)
-{
+int main(void) {
     int i = 42;
     the_answer is(i);
 }
 
 #endif
 
-
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE03
 
-template<typename T>
-class the_answer
-{
-
+template <typename T>
+class the_answer {
 public:
-    the_answer(T &&t)
-    {
+    the_answer(T&& t) {
         show_type(t);
     }
 };
 
-int main(void)
-{
+int main(void) {
     int i = 42;
 
     the_answer is_1(std::move(i));
@@ -108,22 +90,17 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE04
 
-template<typename T>
-class the_answer
-{
-
+template <typename T>
+class the_answer {
 public:
-
-    template<typename U>
-    the_answer(T &&t, U &&u)
-    {
+    template <typename U>
+    the_answer(T&& t, U&& u) {
         show_type(t);
         show_type(u);
     }
 };
 
-int main(void)
-{
+int main(void) {
     int i = 42;
     the_answer is(std::move(i), i);
 }
@@ -133,19 +110,15 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE05
 
-template<typename T>
-class the_answer
-{
-
+template <typename T>
+class the_answer {
 public:
-    the_answer(size_t size, T &&t)
-    {
+    the_answer(size_t size, T&& t) {
         show_type(t);
     }
 };
 
-int main(void)
-{
+int main(void) {
     the_answer is_2(42, 42);
 }
 
@@ -154,20 +127,16 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE06
 
-template<typename T, typename U>
-class the_answer
-{
-
+template <typename T, typename U>
+class the_answer {
 public:
-    the_answer(const T &t, U &&u)
-    {
+    the_answer(const T& t, U&& u) {
         show_type(t);
         show_type(u);
     }
 };
 
-int main(void)
-{
+int main(void) {
     the_answer is("The answer is: ", 42);
 }
 

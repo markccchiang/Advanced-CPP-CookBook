@@ -22,25 +22,19 @@
 #include <iostream>
 
 template <typename T>
-constexpr auto type_info()
-{
+constexpr auto type_info() {
     std::string_view name{__PRETTY_FUNCTION__};
     name.remove_prefix(37);
     name.remove_suffix(1);
     return name;
 }
 
-#define show_type(a)                            \
-    std::cout << #a                             \
-              << " = "                          \
-              << type_info<decltype(a)>()       \
-              << '\n';                          \
+#define show_type(a) std::cout << #a << " = " << type_info<decltype(a)>() << '\n';
 
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-int main(void)
-{
+int main(void) {
     auto i1 = 42;
     auto i2{42};
     auto i3 = {42};
@@ -63,8 +57,7 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
-int main(void)
-{
+int main(void) {
     auto i1 = 42;
     const auto i2 = 42;
     volatile auto i3 = 42;
@@ -81,12 +74,11 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE03
 
-int main(void)
-{
+int main(void) {
     int i = 42;
 
     int i1 = i;
-    int &i2 = i;
+    int& i2 = i;
 
     show_type(i1);
     show_type(i2);
@@ -98,30 +90,30 @@ int main(void)
     show_type(a2);
 
     auto a3 = i1;
-    auto &a4 = i2;
+    auto& a4 = i2;
 
     show_type(a3);
     show_type(a4);
 
-    int &&i3 = std::move(i);
+    int&& i3 = std::move(i);
     show_type(i3);
 
-    auto &&a5 = i3;
+    auto&& a5 = i3;
     show_type(a5);
 
-    auto &&a6 = i1;
+    auto&& a6 = i1;
     show_type(a6);
 
-    auto &&a7 = i2;
+    auto&& a7 = i2;
     show_type(a7);
 
-    auto &&a8 = i3;
+    auto&& a8 = i3;
     show_type(a8);
 
-    auto &&a9 = std::move(i3);
+    auto&& a9 = std::move(i3);
     show_type(a9);
 
-    auto &&a10 = 42;
+    auto&& a10 = 42;
     show_type(a10);
 }
 
@@ -130,13 +122,12 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE04
 
-int main(void)
-{
+int main(void) {
     const int i = 42;
 
     auto i1 = i;
-    auto &i2 = i;
-    auto &&i3 = std::move(i);
+    auto& i2 = i;
+    auto&& i3 = std::move(i);
 
     show_type(i1);
     show_type(i2);
