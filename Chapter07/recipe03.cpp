@@ -22,12 +22,11 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-int main(void)
-{
+int main(void) {
     int n = 42;
     int d = 0;
 
-    auto f = n/d;
+    auto f = n / d;
 }
 
 // /home/user/book/chapter07/recipe03.cpp:30:15: runtime error: division by zero
@@ -38,9 +37,8 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
-int main(void)
-{
-    int *p = 0;
+int main(void) {
+    int* p = 0;
     *p = 42;
 }
 
@@ -52,16 +50,15 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE03
 
-int main(void)
-{
+int main(void) {
     int numbers[] = {4, 8, 15, 16, 23, 42};
     numbers[10] = 0;
 }
 
 // /home/user/book/chapter07/recipe03.cpp:58:15: runtime error: index 10 out of bounds for type 'int [6]'
-// /home/user/book/chapter07/recipe03.cpp:58:17: runtime error: store to address 0x7ffe75e7a0c8 with insufficient space for an object of type 'int'
-// 0x7ffe75e7a0c8: note: pointer points here
-// 00 00 00 00 33 df e9 73 49 7f 00 00 68 ff ff ff ff ff ff ff a8 a1 e7 75 fe 7f 00 00 60 0b cf 74
+// /home/user/book/chapter07/recipe03.cpp:58:17: runtime error: store to address 0x7ffe75e7a0c8 with insufficient space for an object of
+// type 'int' 0x7ffe75e7a0c8: note: pointer points here 00 00 00 00 33 df e9 73 49 7f 00 00 68 ff ff ff ff ff ff ff a8 a1 e7 75 fe 7f 00 00
+// 60 0b cf 74
 
 #endif
 
@@ -70,8 +67,7 @@ int main(void)
 
 #include <climits>
 
-int main(void)
-{
+int main(void) {
     int i = INT_MAX;
     i++;
 }

@@ -24,8 +24,7 @@
 
 #include <iostream>
 
-int main(void)
-{
+int main(void) {
 #ifndef NDEBUG
     std::cout << "The answer is: 42\n";
 #endif
@@ -40,8 +39,7 @@ int main(void)
 
 #include <cassert>
 
-int main(void)
-{
+int main(void) {
     assert(42 == 0);
 }
 

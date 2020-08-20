@@ -22,8 +22,7 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-int main(void)
-{
+int main(void) {
     new int;
 }
 
@@ -42,8 +41,7 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
-int main(void)
-{
+int main(void) {
     auto p = new int;
     delete p;
 
@@ -64,9 +62,8 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE03
 
-int main(void)
-{
-    int *p = (int *)42;
+int main(void) {
+    int* p = (int*)42;
     *p = 0;
 }
 
@@ -86,8 +83,7 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE04
 
-int main(void)
-{
+int main(void) {
     auto p = new int;
     delete p;
 
@@ -108,9 +104,8 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE05
 
-int main(void)
-{
-    int *p = (int *)42;
+int main(void) {
+    int* p = (int*)42;
     delete p;
 }
 
