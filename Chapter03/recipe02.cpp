@@ -24,24 +24,19 @@
 
 #include <iostream>
 
-class the_answer
-{
+class the_answer {
     int m_answer{42};
 
 public:
-
     the_answer() = default;
 
 public:
-
-    ~the_answer()
-    {
+    ~the_answer() {
         std::cout << "The answer is: " << m_answer << '\n';
     }
 };
 
-int main(void)
-{
+int main(void) {
     the_answer is;
     return 0;
 }
@@ -60,34 +55,26 @@ int main(void)
 
 #include <iostream>
 
-class the_answer
-{
+class the_answer {
     int m_answer{};
 
 public:
-
     the_answer() = default;
 
-    explicit the_answer(int answer) :
-        m_answer{answer}
-    { }
+    explicit the_answer(int answer) : m_answer{answer} {}
 
 public:
-
-    ~the_answer()
-    {
+    ~the_answer() {
         if (m_answer != 0) {
             std::cout << "The answer is: " << m_answer << '\n';
         }
     }
 
-    the_answer(the_answer &&other) noexcept
-    {
+    the_answer(the_answer&& other) noexcept {
         *this = std::move(other);
     }
 
-    the_answer &operator=(the_answer &&other) noexcept
-    {
+    the_answer& operator=(the_answer&& other) noexcept {
         if (&other == this) {
             return *this;
         }
@@ -98,12 +85,11 @@ public:
         return *this;
     }
 
-    the_answer(const the_answer &) = default;
-    the_answer &operator=(const the_answer &) = default;
+    the_answer(const the_answer&) = default;
+    the_answer& operator=(const the_answer&) = default;
 };
 
-int main(void)
-{
+int main(void) {
     {
         the_answer is;
         the_answer is_42{42};

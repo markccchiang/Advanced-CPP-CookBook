@@ -22,32 +22,25 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-#include <memory>
 #include <iostream>
+#include <memory>
 
-class the_answer
-{
+class the_answer {
     std::unique_ptr<int> m_answer;
 
 public:
+    explicit the_answer(int answer) : m_answer{std::make_unique<int>(answer)} {}
 
-    explicit the_answer(int answer) :
-        m_answer{std::make_unique<int>(answer)}
-    { }
-
-    ~the_answer()
-    {
+    ~the_answer() {
         std::cout << "The answer is: " << *m_answer << '\n';
     }
 
 public:
-
-    the_answer(the_answer &&other) noexcept = default;
-    the_answer &operator=(the_answer &&other) noexcept = default;
+    the_answer(the_answer&& other) noexcept = default;
+    the_answer& operator=(the_answer&& other) noexcept = default;
 };
 
-int main(void)
-{
+int main(void) {
     the_answer is_42{42};
     the_answer is_what{42};
 
@@ -63,35 +56,28 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
-#include <memory>
 #include <iostream>
+#include <memory>
 
-class the_answer
-{
+class the_answer {
     std::unique_ptr<int> m_answer;
 
 public:
+    explicit the_answer(int answer) : m_answer{std::make_unique<int>(answer)} {}
 
-    explicit the_answer(int answer) :
-        m_answer{std::make_unique<int>(answer)}
-    { }
-
-    ~the_answer()
-    {
+    ~the_answer() {
         std::cout << "The answer is: " << *m_answer << '\n';
     }
 
 public:
+    the_answer(the_answer&& other) noexcept = delete;
+    the_answer& operator=(the_answer&& other) noexcept = delete;
 
-    the_answer(the_answer &&other) noexcept = delete;
-    the_answer &operator=(the_answer &&other) noexcept = delete;
-
-    the_answer(const the_answer &other) = delete;
-    the_answer &operator=(const the_answer &other) = delete;
+    the_answer(const the_answer& other) = delete;
+    the_answer& operator=(const the_answer& other) = delete;
 };
 
-int main(void)
-{
+int main(void) {
     the_answer is_42{42};
     the_answer is_what{42};
 

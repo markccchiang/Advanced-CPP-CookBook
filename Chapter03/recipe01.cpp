@@ -24,20 +24,16 @@
 
 #include <iostream>
 
-class the_answer
-{
+class the_answer {
     int m_answer{42};
 
 public:
-
-    ~the_answer()
-    {
+    ~the_answer() {
         std::cout << "The answer is: " << m_answer << '\n';
     }
 };
 
-int main(void)
-{
+int main(void) {
     the_answer is;
     return 0;
 }
@@ -51,30 +47,25 @@ int main(void)
 
 #include <iostream>
 
-class the_answer
-{
+class the_answer {
     int m_answer{42};
 
 public:
-
-    the_answer()
-    {
+    the_answer() {
         std::cout << "The answer is: " << m_answer << '\n';
     }
 
 public:
-
     virtual ~the_answer() = default;
 
-    the_answer(the_answer &&) noexcept = default;
-    the_answer &operator=(the_answer &&) noexcept = default;
+    the_answer(the_answer&&) noexcept = default;
+    the_answer& operator=(the_answer&&) noexcept = default;
 
-    the_answer(const the_answer &) = default;
-    the_answer &operator=(const the_answer &) = default;
+    the_answer(const the_answer&) = default;
+    the_answer& operator=(const the_answer&) = default;
 };
 
-int main(void)
-{
+int main(void) {
     the_answer is;
     return 0;
 }
@@ -88,30 +79,25 @@ int main(void)
 
 #include <iostream>
 
-class the_answer
-{
+class the_answer {
     int m_answer{42};
 
 public:
-
-    the_answer()
-    {
+    the_answer() {
         std::cout << "The answer is: " << m_answer << '\n';
     }
 
 public:
-
     ~the_answer() = default;
 
-    the_answer(the_answer &&) noexcept = default;
-    the_answer &operator=(the_answer &&) noexcept = default;
+    the_answer(the_answer&&) noexcept = default;
+    the_answer& operator=(the_answer&&) noexcept = default;
 
-    the_answer(const the_answer &) = delete;
-    the_answer &operator=(const the_answer &) = delete;
+    the_answer(const the_answer&) = delete;
+    the_answer& operator=(const the_answer&) = delete;
 };
 
-int main(void)
-{
+int main(void) {
     the_answer is;
     return 0;
 }
@@ -125,30 +111,25 @@ int main(void)
 
 #include <iostream>
 
-class the_answer
-{
+class the_answer {
     int m_answer{42};
 
 public:
-
-    the_answer()
-    {
+    the_answer() {
         std::cout << "The answer is: " << m_answer << '\n';
     }
 
 public:
-
     ~the_answer() = default;
 
-    the_answer(the_answer &&) noexcept = delete;
-    the_answer &operator=(the_answer &&) noexcept = delete;
+    the_answer(the_answer&&) noexcept = delete;
+    the_answer& operator=(the_answer&&) noexcept = delete;
 
-    the_answer(const the_answer &) = default;
-    the_answer &operator=(const the_answer &) = default;
+    the_answer(const the_answer&) = default;
+    the_answer& operator=(const the_answer&) = default;
 };
 
-int main(void)
-{
+int main(void) {
     the_answer is;
     return 0;
 }

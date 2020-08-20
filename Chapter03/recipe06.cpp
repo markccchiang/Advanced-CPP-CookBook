@@ -24,33 +24,27 @@
 
 #include <iostream>
 
-class the_answer
-{
+class the_answer {
 public:
-
     the_answer() = default;
 
-    void foo() &
-    {
+    void foo() & {
         std::cout << "the answer is: 42\n";
     }
 
-    void foo() &&
-    {
+    void foo() && {
         std::cout << "the answer is not: 0\n";
     }
 
 public:
+    the_answer(the_answer&& other) noexcept = default;
+    the_answer& operator=(the_answer&& other) noexcept = default;
 
-    the_answer(the_answer &&other) noexcept = default;
-    the_answer &operator=(the_answer &&other) noexcept = default;
-
-    the_answer(const the_answer &other) = default;
-    the_answer &operator=(const the_answer &other) = default;
+    the_answer(const the_answer& other) = default;
+    the_answer& operator=(const the_answer& other) = default;
 };
 
-int main(void)
-{
+int main(void) {
     the_answer is;
 
     is.foo();

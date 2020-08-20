@@ -24,39 +24,31 @@
 
 #include <iostream>
 
-class copy_or_move
-{
+class copy_or_move {
 public:
-
     copy_or_move() = default;
 
 public:
-
-    copy_or_move(copy_or_move &&other) noexcept
-    {
+    copy_or_move(copy_or_move&& other) noexcept {
         *this = std::move(other);
     }
 
-    copy_or_move &operator=(copy_or_move &&other) noexcept
-    {
+    copy_or_move& operator=(copy_or_move&& other) noexcept {
         std::cout << "move\n";
         return *this;
     }
 
-    copy_or_move(const copy_or_move &other)
-    {
+    copy_or_move(const copy_or_move& other) {
         *this = other;
     }
 
-    copy_or_move &operator=(const copy_or_move &other)
-    {
+    copy_or_move& operator=(const copy_or_move& other) {
         std::cout << "copy\n";
         return *this;
     }
 };
 
-int main(void)
-{
+int main(void) {
     const copy_or_move test1;
     copy_or_move test2;
 

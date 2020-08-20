@@ -22,42 +22,33 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-#include <vector>
 #include <iostream>
+#include <vector>
 
-class the_answer
-{
+class the_answer {
     std::vector<int> m_answer;
 
 public:
-
     the_answer() = default;
 
-    explicit the_answer(int answer) :
-        m_answer{{answer}}
-    { }
+    explicit the_answer(int answer) : m_answer{{answer}} {}
 
-    ~the_answer()
-    {
+    ~the_answer() {
         if (!m_answer.empty()) {
             std::cout << "The answer is: " << m_answer.at(0) << '\n';
         }
     }
 
 public:
-
-    the_answer(the_answer &&other) noexcept
-    {
+    the_answer(the_answer&& other) noexcept {
         *this = std::move(other);
     }
 
-    the_answer &operator=(the_answer &&other) noexcept
-    {
+    the_answer& operator=(the_answer&& other) noexcept {
         try {
             m_answer.emplace(m_answer.begin(), other.m_answer.at(0));
             other.m_answer.erase(other.m_answer.begin());
-        }
-        catch(...) {
+        } catch (...) {
             std::cout << "failed to move\n";
         }
 
@@ -65,8 +56,7 @@ public:
     }
 };
 
-int main(void)
-{
+int main(void) {
     {
         the_answer is_42{};
         the_answer is_what{};
