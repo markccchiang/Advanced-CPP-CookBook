@@ -22,14 +22,13 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-#include <memory>
 #include <iostream>
+#include <memory>
 
 class car;
 class engine;
 
-class car
-{
+class car {
     friend void build_car();
     std::shared_ptr<engine> m_engine;
 
@@ -37,8 +36,7 @@ public:
     car() = default;
 };
 
-class engine
-{
+class engine {
     friend void build_car();
     std::shared_ptr<car> m_car;
 
@@ -46,8 +44,7 @@ public:
     engine() = default;
 };
 
-void build_car()
-{
+void build_car() {
     auto c = std::make_shared<car>();
     auto e = std::make_shared<engine>();
 
@@ -55,8 +52,7 @@ void build_car()
     e->m_car = c;
 }
 
-int main(void)
-{
+int main(void) {
     build_car();
     return 0;
 }
@@ -66,14 +62,13 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
-#include <memory>
 #include <iostream>
+#include <memory>
 
 class car;
 class engine;
 
-class car
-{
+class car {
     friend void build_car();
     std::shared_ptr<engine> m_engine;
 
@@ -81,8 +76,7 @@ public:
     car() = default;
 };
 
-class engine
-{
+class engine {
     friend void build_car();
     std::shared_ptr<car> m_car;
 
@@ -90,8 +84,7 @@ public:
     engine() = default;
 };
 
-void build_car()
-{
+void build_car() {
     auto c = std::make_shared<car>();
     auto e = std::make_shared<engine>();
 
@@ -102,8 +95,7 @@ void build_car()
     std::cout << e.use_count() << '\n';
 }
 
-int main(void)
-{
+int main(void) {
     build_car();
     return 0;
 }
@@ -113,14 +105,13 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE03
 
-#include <memory>
 #include <iostream>
+#include <memory>
 
 class car;
 class engine;
 
-class car
-{
+class car {
     friend void build_car();
     std::shared_ptr<engine> m_engine;
 
@@ -128,8 +119,7 @@ public:
     car() = default;
 };
 
-class engine
-{
+class engine {
     friend void build_car();
     std::weak_ptr<car> m_car;
 
@@ -137,8 +127,7 @@ public:
     engine() = default;
 };
 
-void build_car()
-{
+void build_car() {
     auto c = std::make_shared<car>();
     auto e = std::make_shared<engine>();
 
@@ -149,8 +138,7 @@ void build_car()
     std::cout << e.use_count() << '\n';
 }
 
-int main(void)
-{
+int main(void) {
     build_car();
     return 0;
 }
@@ -160,14 +148,13 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE04
 
-#include <memory>
 #include <iostream>
+#include <memory>
 
 class car;
 class engine;
 
-class car
-{
+class car {
     friend void build_car();
     std::shared_ptr<engine> m_engine;
 
@@ -175,24 +162,21 @@ public:
     car() = default;
 };
 
-class engine
-{
+class engine {
     friend void build_car();
     std::weak_ptr<car> m_car;
 
 public:
     engine() = default;
 
-    void test()
-    {
+    void test() {
         if (m_car.expired()) {
             std::cout << "car deleted\n";
         }
     }
 };
 
-void build_car()
-{
+void build_car() {
     auto e = std::make_shared<engine>();
 
     {
@@ -205,8 +189,7 @@ void build_car()
     e->test();
 }
 
-int main(void)
-{
+int main(void) {
     build_car();
     return 0;
 }

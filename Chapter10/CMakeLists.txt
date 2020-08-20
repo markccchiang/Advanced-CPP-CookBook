@@ -102,14 +102,14 @@ example(02)
 # Recipe 05
 # ------------------------------------------------------------------------------
 
-add_custom_target(recipe05_examples)
+#add_custom_target(recipe05_examples)
 
-function(example number)
-    add_executable(recipe05_example${number} recipe05.cpp)
-    target_compile_definitions(recipe05_example${number} PRIVATE EXAMPLE${number})
-    add_dependencies(recipe05_examples recipe05_example${number})
-    target_link_options(recipe05_example${number} PRIVATE -static)
-endfunction(example)
+#function(example number)
+#    add_executable(recipe05_example${number} recipe05.cpp)
+#    target_compile_definitions(recipe05_example${number} PRIVATE EXAMPLE${number})
+#    add_dependencies(recipe05_examples recipe05_example${number})
+#    target_link_options(recipe05_example${number} PRIVATE -static)
+#endfunction(example)
 
-example(01)
-example(02)
+#example(01)
+#example(02)

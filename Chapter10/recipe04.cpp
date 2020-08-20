@@ -22,32 +22,28 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-#include <memory>
 #include <iostream>
+#include <memory>
 
-class base
-{
+class base {
 public:
     base() = default;
     virtual ~base() = default;
 };
 
-class subclass : public base
-{
+class subclass : public base {
 public:
     subclass() = default;
     ~subclass() override = default;
 };
 
-void foo(base *b)
-{
-    if (dynamic_cast<subclass *>(b)) {
+void foo(base* b) {
+    if (dynamic_cast<subclass*>(b)) {
         std::cout << "downcast successful!!\n";
     }
 }
 
-int main(void)
-{
+int main(void) {
     auto ptr = std::make_unique<subclass>();
     foo(ptr.get());
 
@@ -59,32 +55,28 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
-#include <memory>
 #include <iostream>
+#include <memory>
 
-class base
-{
+class base {
 public:
     base() = default;
     virtual ~base() = default;
 };
 
-class subclass : public base
-{
+class subclass : public base {
 public:
     subclass() = default;
     ~subclass() override = default;
 };
 
-void foo(std::shared_ptr<base> b)
-{
+void foo(std::shared_ptr<base> b) {
     if (std::dynamic_pointer_cast<subclass>(b)) {
         std::cout << "downcast successful!!\n";
     }
 }
 
-int main(void)
-{
+int main(void) {
     auto ptr = std::make_shared<subclass>();
     foo(ptr);
 

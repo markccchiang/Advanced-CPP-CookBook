@@ -22,8 +22,7 @@
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE01
 
-int main(void)
-{
+int main(void) {
     auto ptr = new int;
     *ptr = 42;
 }
@@ -33,8 +32,7 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE02
 
-int main(void)
-{
+int main(void) {
     auto p = new int;
     delete p;
 
@@ -46,8 +44,7 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE03
 
-int main(void)
-{
+int main(void) {
     auto p = new int;
     delete p;
 
@@ -61,8 +58,7 @@ int main(void)
 
 #include <memory>
 
-int main(void)
-{
+int main(void) {
     auto ptr = std::make_unique<int>();
     *ptr = 42;
 }
@@ -72,11 +68,10 @@ int main(void)
 // -----------------------------------------------------------------------------
 #ifdef EXAMPLE05
 
-#include <memory>
 #include <iostream>
+#include <memory>
 
-int main(void)
-{
+int main(void) {
     auto ptr = std::make_unique<int[]>(100);
     ptr[0] = 42;
 }
@@ -88,26 +83,24 @@ int main(void)
 
 #include <array>
 #include <atomic>
-#include <thread>
 #include <iostream>
+#include <thread>
 
 std::atomic<int> count;
 
-void inc(int *val)
-{
+void inc(int* val) {
     count += *val;
 }
 
-int main(void)
-{
+int main(void) {
     auto ptr = std::make_unique<int>(1);
     std::array<std::thread, 42> threads;
 
-    for (auto &thread : threads) {
+    for (auto& thread : threads) {
         thread = std::thread{inc, ptr.get()};
     }
 
-    for (auto &thread : threads) {
+    for (auto& thread : threads) {
         thread.join();
     }
 
@@ -125,29 +118,27 @@ int main(void)
 
 #include <array>
 #include <atomic>
-#include <thread>
 #include <iostream>
+#include <thread>
 
 std::atomic<int> count;
 
-void inc(int *val)
-{
+void inc(int* val) {
     count += *val;
 }
 
-int main(void)
-{
+int main(void) {
     std::array<std::thread, 42> threads;
 
     {
         auto ptr = std::make_unique<int>(1);
 
-        for (auto &thread : threads) {
+        for (auto& thread : threads) {
             thread = std::thread{inc, ptr.get()};
         }
     }
 
-    for (auto &thread : threads) {
+    for (auto& thread : threads) {
         thread.join();
     }
 
@@ -165,29 +156,27 @@ int main(void)
 
 #include <array>
 #include <atomic>
-#include <thread>
 #include <iostream>
+#include <thread>
 
 std::atomic<int> count;
 
-void inc(std::shared_ptr<int> val)
-{
+void inc(std::shared_ptr<int> val) {
     count += *val;
 }
 
-int main(void)
-{
+int main(void) {
     std::array<std::thread, 42> threads;
 
     {
         auto ptr = std::make_shared<int>(1);
 
-        for (auto &thread : threads) {
+        for (auto& thread : threads) {
             thread = std::thread{inc, ptr};
         }
     }
 
-    for (auto &thread : threads) {
+    for (auto& thread : threads) {
         thread.join();
     }
 

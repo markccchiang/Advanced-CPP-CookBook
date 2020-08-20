@@ -24,34 +24,29 @@
 
 #include <array>
 #include <atomic>
-#include <thread>
 #include <iostream>
+#include <thread>
 
 std::atomic<int> count;
 
-void
-inc(std::shared_ptr<int> val)
-{
+void inc(std::shared_ptr<int> val) {
     count += *val;
 }
 
-void
-execute_threads(std::unique_ptr<int> ptr)
-{
+void execute_threads(std::unique_ptr<int> ptr) {
     std::array<std::thread, 42> threads;
     auto shared = std::shared_ptr<int>(std::move(ptr));
 
-    for (auto &thread : threads) {
+    for (auto& thread : threads) {
         thread = std::thread{inc, shared};
     }
 
-    for (auto &thread : threads) {
+    for (auto& thread : threads) {
         thread.join();
     }
 }
 
-int main(void)
-{
+int main(void) {
     execute_threads(std::make_unique<int>(1));
     std::cout << "count: " << count << '\n';
 
